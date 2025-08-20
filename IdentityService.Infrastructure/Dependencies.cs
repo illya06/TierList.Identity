@@ -1,3 +1,4 @@
+using IdentityService.Infrastructure.Persistance.Contexts;
 using IdentityService.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,16 +9,9 @@ public static class Dependencies
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddEntityFrameworkNpgsql()
-            .AddDbContext<IdentityServiceDbContext>(
-                opt => opt.UseNpgsql(configuration.GetConnectionString("IdentityConnection"))
-            );
+        services.AddDbContext<IIdentityServiceDbContext, IdentityServiceDbContext>(
+                opt => opt.UseNpgsql(configuration.GetConnectionString("IdentityConnection")));
             
-        // services.AddDbContext<ApplicationDbContext>(options =>
-        //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
-        // services.AddScoped<IUserRepository, UserRepository>();
-
         return services;
     }
 }
