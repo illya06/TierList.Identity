@@ -2,6 +2,7 @@ using IdentityService.Application.DTOs;
 using IdentityService.Application.Login;
 using IdentityService.Domain.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -25,6 +26,7 @@ public class AuthController : ControllerBase
         return Ok(res);
     }
 
+    [Authorize(policy: "email")]
     [HttpPost("register")]
     public ActionResult<UserDto> Register([FromBody] UserDto userDto)
     {

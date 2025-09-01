@@ -12,6 +12,9 @@ class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Username).IsRequired();
         builder.Property(u => u.Email).IsRequired();
         builder.Property(u => u.PasswordHash);
+        builder.Property(u => u.IsActive);
+        builder.Property(u => u.CreatedAt);
+        builder.Property(u => u.UpdatedAt);
     }
 }
 
